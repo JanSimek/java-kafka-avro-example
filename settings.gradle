@@ -1,0 +1,5 @@
+rootProject.name = 'avrokafka'
+include 'consumer'
+include 'common'
+include 'producer'
+
