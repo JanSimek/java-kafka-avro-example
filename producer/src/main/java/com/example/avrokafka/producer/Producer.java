@@ -19,7 +19,7 @@ public class Producer {
         System.out.println("Starting producer...");
 
         Properties props = new Properties();
-        props.put("bootstrap.servers", "broker:9092");
+        props.put("bootstrap.servers", "localhost:9092");
         props.put("acks", "all");
         props.put("retries", 0);
         props.put("batch.size", 16384);
@@ -31,7 +31,7 @@ public class Producer {
         org.apache.kafka.clients.producer.Producer<String, byte[]> producer = new KafkaProducer<>(props);
         for (int i = 0; i < 100; i++) {
 
-            Message msg = Message.newBuilder().setUser("Honza").setMessage("Ahoj Honzo, tohle je zkouska c. " + i).build();
+            Message msg = Message.newBuilder().setUser("Tester").setMessage("Hello World! This is message No " + i).build();
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             BinaryEncoder encoder = EncoderFactory.get().binaryEncoder(out, null);
             DatumWriter<Message> writer = new SpecificDatumWriter<Message>(Message.getClassSchema());
@@ -48,6 +48,7 @@ public class Producer {
 
         System.out.println("Closing producer...");
         producer.close();
-        System.out.println("Bye...");
     }
+
+
 }
